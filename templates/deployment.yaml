@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "containerinfo.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: containerinfo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: containerinfo
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: containerinfo
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      containers:
+      - image: {{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        name: containerinfo
+        ports:
+          - containerPort: 5000
+            name: http
+            protocol: TCP

@@ -1,0 +1,15 @@
+apiVersion: v2
+name: containerinfo
+description: Helm chart for containerinfo
+keywords:
+  - containerinfo
+  - kubernetes
+  - flask
+sources:
+  - https://gitlab.com/pal.toth/lester-guerzon
+appVersion: 1.0.0
+maintainers:
+  - name: Lester Guerzon
+    email: guerzon@proton.me
+    url: https://github.com/guerzon
+version: 1.0.0

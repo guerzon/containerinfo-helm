@@ -1,0 +1,4 @@
+ingress:
+  enabled: true
+  hostname: containerinfo.contoso.com
+  tlsSecret: containerinfo.contoso.com-tls

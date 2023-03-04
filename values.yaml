@@ -1,0 +1,94 @@
+
+## @section General settings
+##
+image:
+  ## @param image.registry containerinfo image registry
+  ##
+  registry: docker.io
+  ## @param image.repository containerinfo image repository
+  ##
+  repository: guerzon/containerinfo
+  ##
+  ## @param image.tag containerinfo image tag
+  ## Ref: https://hub.docker.com/r/containerinfo/server/tags
+  ##
+  tag: "latest"
+  ## @param image.pullPolicy containerinfo image pull policy
+  ## ref: https://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+  ##
+  pullPolicy: IfNotPresent
+  ## @param image.pullSecrets Specify docker-registry secret names
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  ## Example:
+  ## pullSecrets:
+  ##   - myRegistryKeySecretName
+  ##
+  pullSecrets: []
+## @param fullnameOverride String to override the application name.
+##
+fullnameOverride: ""
+
+## @section Security settings
+##
+## @param serviceAccount.name Name of the service account to create
+##
+serviceAccount:
+  name: "containerinfosa"
+
+## @section Exposure Parameters
+##
+
+## Ingress configuration
+## Refer to the README for some examples
+##
+ingress:
+  ## @param ingress.enabled Deploy an ingress resource.
+  ##
+  enabled: false
+  ## @param ingress.class Ingress resource class
+  ## The Ingress class to use, e. g. "nginx" for a nginx ingress controller or "alb" for a AWS LB controller.
+  #
+  class: "nginx"
+  ## @param ingress.nginxIngressAnnotations Add nginx specific ingress annotations
+  ## This annotations are only makes sense for the kubernetes nginx ingress controller (https://kubernetes.github.io/ingress-nginx/)
+  ##
+  nginxIngressAnnotations: true
+  ## @param ingress.additionalAnnotations Additional annotations for the ingress resource.
+  ##
+  additionalAnnotations: {}
+  ## @param ingress.tls Enable TLS on the ingress resource.
+  ##
+  tls: true
+  ## @param ingress.hostname Hostname for the ingress.
+  ##
+  hostname: "containerinfo.contoso.com"
+  ## @param ingress.path Default application path for the ingress
+  ##
+  path: "/"
+  ## @param ingress.pathType Path type for the ingress
+  ## Ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
+  ##
+  pathType: "ImplementationSpecific"
+  ## @param ingress.pathTypeWs Path type for the ingress
+  ## Ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
+  ##
+  pathTypeWs: "ImplementationSpecific"
+  ## @param ingress.tlsSecret Kubernetes secret containing the SSL certificate when using the "nginx" class.
+  ##
+  tlsSecret: ""
+  ## @param ingress.nginxAllowList Comma-separated list of IP addresses and subnets to allow.
+  ##
+  nginxAllowList: ""
+  ## TODO:
+  ##   - Add support for using cert-manager.
+  ##   - Support for multiple TLS hostnames.
+  ##
+
+## Service configuration
+service:
+  ## @param service.type Service type
+  ##
+  type: "ClusterIP"
+  ## @param service.annotations Additional annotations for the containerinfo service
+  ##
+  annotations: {}
